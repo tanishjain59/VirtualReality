@@ -1,0 +1,126 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Interactive A-Frame Environment</title>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script>
+      // Function to show the pop-up image
+      function showPopupImage() {
+        console.log('Image button clicked');
+        var popupImageEntity = document.querySelector('#popup-image-entity');
+        popupImageEntity.setAttribute('visible', 'true');
+      }
+      // Function to show the pop-up image2
+      function showPopupImage2() {
+        console.log('Image 2 button clicked');
+        var popupImage2Entity = document.querySelector('#popup-image2-entity');
+        popupImage2Entity.setAttribute('visible', 'true');
+      }
+      function showRightPopupVideo() {
+        console.log('Right-side video button clicked');
+        var rightPopupVideoEntity = document.querySelector('#right-popup-launch');
+        rightPopupVideoEntity.setAttribute('visible', 'true');
+        var video = document.querySelector('#popup-launch');
+        video.play();
+      }
+      // Add event listeners once the DOM is fully loaded
+      document.addEventListener('DOMContentLoaded', function() {
+        var imageButton = document.querySelector('#image-button');
+        var image2Button = document.querySelector('#image2-button');
+        var rightVideoButton = document.querySelector('#right-video-button');
+        imageButton.addEventListener('click', showPopupImage);
+        image2Button.addEventListener('click', showPopupImage2);
+        rightVideoButton.addEventListener('click', showRightPopupVideo);
+      });
+    </script>
+  </head>
+  <body>
+    <a-scene>
+      <a-assets>
+        <!-- Include the flyer image asset -->
+        <img id="flyer-image" src="https://cdn.glitch.global/f2876cca-df2d-4383-a7af-7ebe0a6f7fd1/Page%205.jpg?v=1722360885225">
+        <!-- Include the pop-up image asset -->
+        <img id="popup-hazard" src="https://cdn.glitch.global/f2876cca-df2d-4383-a7af-7ebe0a6f7fd1/pic1.jpg?v=1722361127219">
+        <!-- Include the pop-up image 2 asset -->
+        <img id="popup-reentry" src="https://cdn.glitch.global/f2876cca-df2d-4383-a7af-7ebe0a6f7fd1/pic2.jpg?v=1722361127669">
+        <!-- Include the pop-up video asset -->
+        <video id="popup-launch" src="https://cdn.glitch.global/f2876cca-df2d-4383-a7af-7ebe0a6f7fd1/10%20Second%20Rocket%20Launch.mp4?v=1722362167423" crossorigin="anonymous"></video>
+      </a-assets>
+      
+      <a-camera position="0 1.6 0" wasd-controls-enabled="true" look-controls="true">
+        <!-- Add cursor for click interactions -->
+        <a-cursor></a-cursor>
+      </a-camera>
+      <a-light type="directional" intensity="0.5" position="1 1 1"></a-light>
+      <a-light type="ambient" intensity="0.7"></a-light>
+      <a-box position="0 1 -5" rotation="0 45 0" color="#4CC3D9"></a-box>
+      <!-- Floor -->
+      <a-plane position="0 0 0" rotation="-90 0 0" width="20" height="20" color="#8B4513"></a-plane>
+      <!-- Ceiling -->
+      <a-plane position="0 6 0" rotation="90 0 0" width="20" height="20" color="#D2B48C"></a-plane>
+      <!-- Walls -->
+      <a-plane position="0 3 -10" rotation="0 0 0" width="20" height="6" color="#FFFFFF"></a-plane>
+      <a-plane position="0 3 10" rotation="0 180 0" width="20" height="6" color="#FFFFFF"></a-plane>
+      <a-plane position="-10 3 0" rotation="0 90 0" width="20" height="6" color="#FFFFFF"></a-plane>
+      <a-plane position="10 3 0" rotation="0 -90 0" width="20" height="6" color="#FFFFFF"></a-plane>
+      
+      <!-- Display the flyer image in 3D space -->
+      <a-entity 
+        geometry="primitive: plane; height: 1; width: 0.79;"
+        material="src: #flyer-image"
+        position="0 3 -3"
+        rotation="0 0 0"
+        scale="6 6 6">
+      </a-entity>
+      
+      <!-- Sign for Image Button -->
+      <a-plane id="image-button" position="-5 1 5" width="2" height="1" color="#FF0000" rotation="0 45 0">
+        <a-text value="Materials (1)" align="center" position="0 0 0.1" color="#FFFFFF"></a-text>
+      </a-plane>
+      
+      <!-- Sign for Video Button -->
+      <a-plane id="image2-button" position="-5 1 0" width="2" height="1" color="#00FF00" rotation="0 45 0">
+        <a-text value="Materials (2)" align="center" position="0 0 0.1" color="#FFFFFF"></a-text>
+      </a-plane>
+      
+      <!-- Sign for Right-side Video Button -->
+      <a-plane id="right-video-button" position="5 1 3" width="2" height="1" color="#0000FF" rotation="0 -45 0">
+        <a-text value="Launch Video" align="center" position="0 0 0.1" color="#FFFFFF"></a-text>
+      </a-plane>
+      
+      <!-- Pop-up image entity (initially hidden) -->
+      <a-entity 
+        id="popup-image-entity" 
+        geometry="primitive: plane; height: 1; width: 1.5;"       
+        material="src: #popup-hazard"
+        position="-5 3 5"
+        rotation="0 45 0"
+        scale="3 3 3"
+        visible="false">
+      </a-entity>
+      
+      <!-- Pop-up image entity (initially hidden) -->
+      <a-entity id="popup-image2-entity" 
+        geometry="primitive: plane; height: 1; width: 1.5;"
+        material="src: #popup-reentry"
+        position="-5 3 0"
+        rotation="0 45 0"
+        scale="3 3 3"
+        visible="false">
+      </a-entity>
+      
+      <!-- Pop-up video entity (initially hidden) -->
+      <a-entity id="right-popup-launch" 
+        geometry="primitive: plane; height: 1; width: 1.5;"
+        material="src: #popup-launch"
+        position="5 3 3"
+        rotation="0 -45 0"
+        scale="3 3 3"
+        visible="false">
+      </a-entity>
+      
+      
+      
+    </a-scene>
+  </body>
+</html>
